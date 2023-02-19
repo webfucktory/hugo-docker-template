@@ -1,0 +1,20 @@
+version: '3.8'
+
+services:
+
+  hugo:
+    image: HUGO_IMAGE:${HUGO_VERSION}
+    networks:
+      - traefik
+    deploy:
+      labels:
+        - traefik.constraint-label=traefik
+        - traefik.docker.network=traefik
+        - traefik.enable=true
+        - traefik.http.routers.hugo-http.entrypoints=http
+        - traefik.http.routers.hugo-http.rule=Host(`localhost`)
+        - traefik.http.services.hugo.loadbalancer.server.port=80
+
+networks:
+  traefik:
+    external: true
