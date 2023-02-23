@@ -13,7 +13,7 @@ services:
 
         - traefik.http.middlewares.https-redirect.redirectscheme.scheme=https
         - traefik.http.middlewares.https-redirect.redirectscheme.permanent=true
-        #- traefik.http.middlewares.basicauth.basicauth.users=root:${HUGO_HASHED_PASSWORD}
+        #- traefik.http.middlewares.hugo-auth.basicauth.users=root:${HUGO_HASHED_PASSWORD}
 
         # Router: HTTP
         - traefik.http.routers.hugo-http.rule=Host(`*HOST*`)
@@ -25,7 +25,7 @@ services:
         - traefik.http.routers.hugo-https.entrypoints=https
         - traefik.http.routers.hugo-https.tls=true
         - traefik.http.routers.hugo-https.tls.certresolver=le
-        #- traefik.http.routers.hugo-https.middlewares=basicauth
+        #- traefik.http.routers.hugo-https.middlewares=hugo-auth
 
     networks:
       - traefik
